@@ -1,5 +1,5 @@
 %define name	hostapd
-%define version	0.5.7
+%define version	0.5.8
 %define release %mkrel 1
 
 Name:		%{name}
@@ -7,7 +7,7 @@ Version:	%{version}
 Release:	%{release}
 URL:		http://hostap.epitest.fi/hostapd/
 Group:		System/Servers
-Source0:	%{name}-%version.tar.bz2
+Source0:	%{name}-%version.tar.gz
 Source1:	%{name}.init
 Source2:	%{name}-config-build
 Patch0:		%{name}-config.patch
@@ -15,7 +15,7 @@ Summary:	Hostapd is an optional user space component for Host AP driver
 License:	GPL
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 BuildRequires:	libopenssl-devel
-BuildRequires:	d80211-source
+BuildRequires:	mac80211-source
 BuildRequires:	madwifi-source
 Requires(post):	rpm-helper
 Requires(preun): rpm-helper
