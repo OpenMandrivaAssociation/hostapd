@@ -13,7 +13,6 @@ Source2:	%{name}-config-build
 Patch0:		%{name}-config.patch
 Summary:	Hostapd is an optional user space component for Host AP driver
 License:	GPL
-BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 BuildRequires:	libopenssl-devel
 BuildRequires:	mac80211-source
 BuildRequires:	madwifi-source
