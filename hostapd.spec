@@ -15,7 +15,6 @@ Summary:	Optional user space component for Host AP driver
 License:	GPL
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 BuildRequires:	libopenssl-devel
-#BuildRequires:	mac80211-source
 BuildRequires:	madwifi-source
 Requires(post):	rpm-helper
 Requires(preun): rpm-helper
