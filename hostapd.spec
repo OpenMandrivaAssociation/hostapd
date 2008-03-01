@@ -1,6 +1,6 @@
 %define name	hostapd
-%define version	0.5.8
-%define release %mkrel 3
+%define version	0.6.3
+%define release %mkrel 1
 
 Name:		%{name}
 Version:	%{version}
@@ -15,7 +15,7 @@ Summary:	Optional user space component for Host AP driver
 License:	GPL
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 BuildRequires:	libopenssl-devel
-BuildRequires:	mac80211-source
+#BuildRequires:	mac80211-source
 BuildRequires:	madwifi-source
 Requires(post):	rpm-helper
 Requires(preun): rpm-helper
@@ -32,13 +32,18 @@ RADIUS accounting.
 %prep
 %setup -q -n %{name}-%{version}
 %patch0 -p1 -b .mdkconf 
+pushd %{name}
 cp %{SOURCE2} .config
+popd
 
 %build
+pushd %{name}
 %{__perl} -pi -e 's/CFLAGS =.*/CFLAGS = -MMD %{optflags}/' Makefile
 %{__make} CC="%{__cc}" #CFLAGS="-MMD %{optflags}"
+popd
 
 %install
+pushd %{name}
 install -d -m 755 %{buildroot}%{_sbindir}
 install -d -m 755 %{buildroot}%{_sysconfdir}/%{name}
 install -d -m 755 %{buildroot}%{_initrddir}
@@ -48,6 +53,7 @@ install -m 644 %{name}.conf   %{buildroot}%{_sysconfdir}/%{name}
 install -m 644 %{name}.accept %{buildroot}%{_sysconfdir}/%{name}
 install -m 644 %{name}.deny   %{buildroot}%{_sysconfdir}/%{name}
 install -m 755 %{SOURCE1}     %{buildroot}%{_initrddir}/%{name}
+popd
 
 %clean
 rm -rf %{buildroot}
@@ -63,7 +69,7 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-%doc COPYING ChangeLog README developer.txt
+%doc %{name}/ChangeLog %{name}/README %{name}/developer.txt
 %{_sbindir}/%{name}
 %{_sbindir}/%{name}_cli
 %config(noreplace) %{_initrddir}/%{name}
