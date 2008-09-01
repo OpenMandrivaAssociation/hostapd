@@ -1,6 +1,6 @@
 %define name	hostapd
-%define version	0.6.3
-%define release %mkrel 3
+%define version	0.6.4
+%define release %mkrel 1
 
 Name:		%{name}
 Version:	%{version}
