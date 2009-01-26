@@ -1,5 +1,5 @@
 %define name	hostapd
-%define version	0.6.4
+%define version	0.6.7
 %define release %mkrel 1
 
 Name:		%{name}
@@ -30,7 +30,7 @@ RADIUS accounting.
 
 %prep
 %setup -q -n %{name}-%{version}
-%patch0 -p1 -b .mdkconf 
+%patch0 -p0 -b .mdkconf 
 pushd %{name}
 cp %{SOURCE2} .config
 popd
