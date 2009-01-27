@@ -15,7 +15,7 @@ Summary:	Optional user space component for Host AP driver
 License:	GPL
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 BuildRequires:	libopenssl-devel
-BuildRequires:	madwifi-source
+BuildRequires:	madwifi-source libnl-devel
 Requires(post):	rpm-helper
 Requires(preun): rpm-helper
 Requires(postun): rpm-helper
