@@ -1,6 +1,6 @@
 %define name	hostapd
-%define version	0.6.7
-%define release %mkrel 4
+%define version	0.7.3
+%define release %mkrel 1
 
 Name:		%{name}
 Version:	%{version}
@@ -68,7 +68,7 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-%doc %{name}/ChangeLog %{name}/README %{name}/developer.txt
+%doc %{name}/ChangeLog %{name}/README
 %{_sbindir}/%{name}
 %{_sbindir}/%{name}_cli
 %config(noreplace) %{_initrddir}/%{name}
