@@ -68,7 +68,7 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-%doc %{name}/ChangeLog %{name}/README
+%doc %{name}/ChangeLog %{name}/README %{name}/README-WPS
 %{_sbindir}/%{name}
 %{_sbindir}/%{name}_cli
 %config(noreplace) %{_initrddir}/%{name}
