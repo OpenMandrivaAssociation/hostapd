@@ -1,5 +1,6 @@
 %define name	hostapd
 %define version	0.7.3
+%define subrel	1
 %define release %mkrel 2
 
 Name:		%{name}
@@ -38,7 +39,7 @@ popd
 %build
 pushd %{name}
 %{__perl} -pi -e 's/CFLAGS =.*/CFLAGS = -MMD %{optflags}/' Makefile
-%{__make} CC="%{__cc}" #CFLAGS="-MMD %{optflags}"
+%{__make} CC="%{__cc}" #CFLAGS="-MMD % {optflags}"
 popd
 
 %install
@@ -46,12 +47,12 @@ pushd %{name}
 install -d -m 755 %{buildroot}%{_sbindir}
 install -d -m 755 %{buildroot}%{_sysconfdir}/%{name}
 install -d -m 755 %{buildroot}%{_initrddir}
-install -m 755 %{name}        %{buildroot}%{_sbindir}
-install -m 755 %{name}_cli    %{buildroot}%{_sbindir}
-install -m 644 %{name}.conf   %{buildroot}%{_sysconfdir}/%{name}
+install -m 755 %{name} %{buildroot}%{_sbindir}
+install -m 755 %{name}_cli %{buildroot}%{_sbindir}
+install -m 644 %{name}.conf %{buildroot}%{_sysconfdir}/%{name}
 install -m 644 %{name}.accept %{buildroot}%{_sysconfdir}/%{name}
-install -m 644 %{name}.deny   %{buildroot}%{_sysconfdir}/%{name}
-install -m 755 %{SOURCE1}     %{buildroot}%{_initrddir}/%{name}
+install -m 644 %{name}.deny %{buildroot}%{_sysconfdir}/%{name}
+install -m 755 %{SOURCE1} %{buildroot}%{_initrddir}/%{name}
 popd
 
 %clean
