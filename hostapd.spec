@@ -1,20 +1,19 @@
 %define name	hostapd
-%define version	0.7.3
+%define version	1.0
 %define subrel	1
-%define release %mkrel 2
+%define release 1
 
 Name:		%{name}
 Version:	%{version}
 Release:	%{release}
 URL:		http://hostap.epitest.fi/hostapd/
 Group:		System/Servers
-Source0:	%{name}-%version.tar.gz
+Source0:	http://hostap.epitest.fi/releases/%{name}-%{version}.tar.gz
 Source1:	%{name}.init
 Source2:	%{name}-config-build
 Patch0:		%{name}-config.patch
 Summary:	Optional user space component for Host AP driver
 License:	GPL
-BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 BuildRequires:	libopenssl-devel
 BuildRequires:	madwifi-source libnl-devel
 Requires(post):	rpm-helper
@@ -55,9 +54,6 @@ install -m 644 %{name}.deny %{buildroot}%{_sysconfdir}/%{name}
 install -m 755 %{SOURCE1} %{buildroot}%{_initrddir}/%{name}
 popd
 
-%clean
-rm -rf %{buildroot}
-
 %post
 %_post_service %{name}
 
@@ -68,7 +64,6 @@ rm -rf %{buildroot}
 %_postun_userdel %{name}
 
 %files
-%defattr(-,root,root)
 %doc %{name}/ChangeLog %{name}/README %{name}/README-WPS
 %{_sbindir}/%{name}
 %{_sbindir}/%{name}_cli
@@ -76,5 +71,3 @@ rm -rf %{buildroot}
 %config(noreplace) %{_sysconfdir}/%{name}/%{name}.conf
 %config(noreplace) %{_sysconfdir}/%{name}/%{name}.accept
 %config(noreplace) %{_sysconfdir}/%{name}/%{name}.deny
-
-
