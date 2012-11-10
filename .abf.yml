@@ -1,0 +1,5 @@
+sources:
+  "hostapd-1.0.tar.gz:"	4edf267bc5943a5f7d6d9c0abcce0973bfbad5fa
+  "hostapd-config-build:"	70fc9ba8aa45af309651f29939f57c0e9ffaa1d3
+  "hostapd.init:"	5aa60b6a387b4c59ec27e8b8c81f348f2867fc2f
+  "hostapd.service:"	4fd7a02b450d79d06a26dc7b4eb9e7e6f8f43a1b
