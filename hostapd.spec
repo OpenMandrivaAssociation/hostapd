@@ -1,5 +1,5 @@
 %define name	hostapd
-%define version	1.0
+%define version	1.1
 %define release %mkrel 1
 
 Name:		%{name}
@@ -7,15 +7,17 @@ Version:	%{version}
 Release:	%{release}
 URL:		http://hostap.epitest.fi/hostapd/
 Group:		System/Servers
-Source0:	%{name}-%version.tar.gz
+Source0:	http://hostap.epitest.fi/releases/%{name}-%version.tar.gz
 Source1:	%{name}.init
 Source2:	%{name}-config-build
 Source3:        %{name}.service
 Patch0:		%{name}-config.patch
+Patch1:		hostapd-1.0-libnl_path_fix.patch
+Patch2:		hostapd-1.0-tls_length_fix.patch
 Summary:	Optional user space component for Host AP driver
 License:	GPL
-BuildRequires:	libopenssl-devel
-BuildRequires:	libnl-devel
+BuildRequires:	pkgconfig(openssl)
+BuildRequires:	pkgconfig(libnl-3.0)
 Requires(post):  rpm-helper
 Requires(preun): rpm-helper
 BuildRequires:    systemd-units
@@ -32,7 +34,9 @@ RADIUS accounting.
 
 %prep
 %setup -q -n %{name}-%{version}
-%patch0 -p0 -b .mdkconf 
+%patch0 -p0 -b .mdkconf
+%patch1 -p1 -b .nl3
+%patch2 -p1 -b .tls
 pushd %{name}
 cp %{SOURCE2} .config
 popd
