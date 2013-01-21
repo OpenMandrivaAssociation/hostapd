@@ -1,6 +1,6 @@
 %define name	hostapd
-%define version	1.1
-%define release %mkrel 1
+%define version	2.0
+%define release 1
 
 Name:		%{name}
 Version:	%{version}
@@ -12,7 +12,6 @@ Source1:	%{name}.init
 Source2:	%{name}-config-build
 Source3:        %{name}.service
 Patch0:		%{name}-config.patch
-Patch1:		hostapd-1.0-libnl_path_fix.patch
 Patch2:		hostapd-1.0-tls_length_fix.patch
 Summary:	Optional user space component for Host AP driver
 License:	GPL
@@ -35,7 +34,6 @@ RADIUS accounting.
 %prep
 %setup -q -n %{name}-%{version}
 %patch0 -p0 -b .mdkconf
-%patch1 -p1 -b .nl3
 %patch2 -p1 -b .tls
 pushd %{name}
 cp %{SOURCE2} .config
