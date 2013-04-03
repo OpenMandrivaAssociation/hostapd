@@ -1,28 +1,24 @@
-%define name	hostapd
-%define version	2.0
-%define release 1
-
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
+Name:		hostapd
+Version:	2.0
+Release:	2
 URL:		http://hostap.epitest.fi/hostapd/
 Group:		System/Servers
 Source0:	http://hostap.epitest.fi/releases/%{name}-%version.tar.gz
 Source1:	%{name}.init
 Source2:	%{name}-config-build
-Source3:        %{name}.service
+Source3:	%{name}.service
 Patch0:		%{name}-config.patch
 Patch2:		hostapd-1.0-tls_length_fix.patch
 Summary:	Optional user space component for Host AP driver
 License:	GPL
 BuildRequires:	pkgconfig(openssl)
 BuildRequires:	pkgconfig(libnl-3.0)
-Requires(post):  rpm-helper
-Requires(preun): rpm-helper
-BuildRequires:    systemd-units
-Requires(post):   sysvinit
-Requires(preun):  sysvinit
-Requires(postun): sysvinit
+Requires(post):	rpm-helper
+Requires(preun):	rpm-helper
+BuildRequires:		systemd-units
+Requires(post):		sysvinit
+Requires(preun):	sysvinit
+Requires(postun):	sysvinit
 
 %description
 Hostapd is an optional user space component for Host AP driver. It adds 
@@ -32,7 +28,7 @@ based access control, IEEE 802.1X Authenticator and dynamic WEP keying,
 RADIUS accounting. 
 
 %prep
-%setup -q -n %{name}-%{version}
+%setup -q
 %patch0 -p0 -b .mdkconf
 %patch2 -p1 -b .tls
 pushd %{name}
@@ -56,8 +52,13 @@ install -m 755 %{name}_cli    %{buildroot}%{_sbindir}
 install -m 600 %{name}.conf   %{buildroot}%{_sysconfdir}/%{name}
 install -m 644 %{name}.accept %{buildroot}%{_sysconfdir}/%{name}
 install -m 644 %{name}.deny   %{buildroot}%{_sysconfdir}/%{name}
+
+%if %mdvver < 201200
 install -pm 0755 %{SOURCE1}   %{buildroot}%{_initrddir}/%{name}
+%else
 install -pm 644 %{SOURCE3}   %{buildroot}/%{_unitdir}/%{name}.service
+%endif
+
 popd
 
 %post
@@ -73,8 +74,12 @@ popd
 %doc %{name}/ChangeLog %{name}/README
 %{_sbindir}/%{name}
 %{_sbindir}/%{name}_cli
+%if %mdvver < 201200
 %config(noreplace) %{_initrddir}/%{name}
+%else
+%config(noreplace) %{_unitdir}/%{name}.service
+%endif
 %config(noreplace) %{_sysconfdir}/%{name}/%{name}.conf
 %config(noreplace) %{_sysconfdir}/%{name}/%{name}.accept
 %config(noreplace) %{_sysconfdir}/%{name}/%{name}.deny
-%config(noreplace) %{_unitdir}/%{name}.service
+
