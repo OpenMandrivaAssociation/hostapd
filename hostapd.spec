@@ -1,24 +1,22 @@
+Summary:	Optional user space component for Host AP driver
 Name:		hostapd
 Version:	2.0
 Release:	2
-URL:		http://hostap.epitest.fi/hostapd/
+License:	GPLv2
 Group:		System/Servers
-Source0:	http://hostap.epitest.fi/releases/%{name}-%version.tar.gz
+Url:		http://hostap.epitest.fi/hostapd/
+Source0:	http://hostap.epitest.fi/releases/%{name}-%{version}.tar.gz
 Source1:	%{name}.init
 Source2:	%{name}-config-build
 Source3:	%{name}.service
 Patch0:		%{name}-config.patch
 Patch2:		hostapd-1.0-tls_length_fix.patch
-Summary:	Optional user space component for Host AP driver
-License:	GPL
-BuildRequires:	pkgconfig(openssl)
+
+BuildRequires:	systemd-units
 BuildRequires:	pkgconfig(libnl-3.0)
-Requires(post):	rpm-helper
-Requires(preun):	rpm-helper
-BuildRequires:		systemd-units
-Requires(post):		sysvinit
-Requires(preun):	sysvinit
-Requires(postun):	sysvinit
+BuildRequires:	pkgconfig(openssl)
+Requires(post,preun):	rpm-helper
+Requires(post,preun,postun):	sysvinit
 
 %description
 Hostapd is an optional user space component for Host AP driver. It adds 
@@ -29,16 +27,15 @@ RADIUS accounting.
 
 %prep
 %setup -q
-%patch0 -p0 -b .mdkconf
-%patch2 -p1 -b .tls
+%apply_patches
 pushd %{name}
 cp %{SOURCE2} .config
 popd
 
 %build
 pushd %{name}
-%{__perl} -pi -e 's/CFLAGS =.*/CFLAGS = -MMD %{optflags}/' Makefile
-%{__make} CC="%{__cc}" #CFLAGS="-MMD %{optflags}"
+ded -i -e 's/CFLAGS =.*/CFLAGS = -MMD %{optflags}/' Makefile
+%make CC="%{__cc}" #CFLAGS="-MMD %{optflags}"
 popd
 
 %install
