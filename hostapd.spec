@@ -34,7 +34,7 @@ popd
 
 %build
 pushd %{name}
-ded -i -e 's/CFLAGS =.*/CFLAGS = -MMD %{optflags}/' Makefile
+sed -i -e 's/CFLAGS =.*/CFLAGS = -MMD %{optflags}/' Makefile
 %make CC="%{__cc}" #CFLAGS="-MMD %{optflags}"
 popd
 
