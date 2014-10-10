@@ -1,6 +1,2 @@
-removed_sources:
-  hostapd-1.0.tar.gz: 4edf267bc5943a5f7d6d9c0abcce0973bfbad5fa
-  hostapd-1.1.tar.gz: 247ab472d501ef3e10b271446842527143976708
 sources:
-  hostapd-2.0.tar.gz: 2831e074d04026232eea865c692221e8b9764f78
-  hostapd-2.2.tar.gz: e99e56e7385b6adfb7c771804bcf5440514b2d79
+  hostapd-2.3.tar.gz: ee3cb7c6e9d2965d5a55a7ed877af5e311085bba
