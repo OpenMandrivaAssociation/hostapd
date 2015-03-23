@@ -1,7 +1,7 @@
 Summary:	Optional user space component for Host AP driver
 Name:		hostapd
-Version:	2.3
-Release:	2
+Version:	2.4
+Release:	1
 License:	GPLv2
 Group:		System/Servers
 Url:		http://hostap.epitest.fi/hostapd/
@@ -9,6 +9,7 @@ Source0:	http://hostap.epitest.fi/releases/%{name}-%{version}.tar.gz
 Source2:	%{name}-config-build
 Source3:	%{name}.service
 Patch0:		%{name}-config.patch
+Patch1:		hostapd-hlr_auc_gw-openssl.patch
 Patch2:		hostapd-1.0-tls_length_fix.patch
 
 BuildRequires:	systemd-units
