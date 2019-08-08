@@ -2,7 +2,7 @@
 
 Summary:	Optional user space component for Host AP driver
 Name:		hostapd
-Version:	2.8
+Version:	2.9
 Release:	1
 License:	GPLv2
 Group:		System/Servers
