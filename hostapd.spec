@@ -28,7 +28,7 @@ RADIUS accounting.
 
 %prep
 %setup -q
-%apply_patches
+%autopatch -p1
 pushd %{name}
 cp %{SOURCE2} .config
 echo "CC = %{__cc}" >> .config
