@@ -2,12 +2,12 @@
 
 Summary:	Optional user space component for Host AP driver
 Name:		hostapd
-Version:	2.9
+Version:	2.10
 Release:	1
 License:	GPLv2
 Group:		System/Servers
 Url:		http://hostap.epitest.fi/hostapd/
-Source0:	http://hostap.epitest.fi/releases/%{name}-%{version}.tar.gz
+Source0:	https://w1.fi/releases/%{name}-%{version}.tar.gz
 Source2:	%{name}-config-build
 Source3:	%{name}.service
 Patch0:		%{name}-config.patch
@@ -20,11 +20,11 @@ Requires(post,preun):	rpm-helper
 Requires(post,preun,postun):	sysvinit
 
 %description
-Hostapd is an optional user space component for Host AP driver. It adds 
-more features to the basic IEEE 802.11 management included in the kernel 
-driver: using external RADIUS authentication server for MAC address 
-based access control, IEEE 802.1X Authenticator and dynamic WEP keying, 
-RADIUS accounting. 
+Hostapd is an optional user space component for Host AP driver. It adds
+more features to the basic IEEE 802.11 management included in the kernel
+driver: using external RADIUS authentication server for MAC address
+based access control, IEEE 802.1X Authenticator and dynamic WEP keying,
+RADIUS accounting.
 
 %prep
 %setup -q
@@ -35,6 +35,7 @@ echo "CC = %{__cc}" >> .config
 popd
 
 %build
+%set_build_flags
 pushd %{name}
 sed -i -e 's/CFLAGS =.*/CFLAGS = -MMD %{optflags}/' Makefile
 %make CC="%{__cc}" #CFLAGS="-MMD %{optflags}"
