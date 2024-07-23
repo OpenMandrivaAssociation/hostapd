@@ -13,7 +13,7 @@ Source3:	%{name}.service
 Patch0:		%{name}-config.patch
 Patch2:		hostapd-1.0-tls_length_fix.patch
 
-BuildRequires:	systemd-units
+BuildRequires:	pkgconfig(libsystemd)
 BuildRequires:	pkgconfig(libnl-3.0)
 BuildRequires:	pkgconfig(openssl)
 Requires(post,preun):	rpm-helper
