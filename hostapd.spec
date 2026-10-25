@@ -2,8 +2,8 @@
 
 Summary:	Optional user space component for Host AP driver
 Name:		hostapd
-Version:	2.11
-Release:	2
+Version:	2.12
+Release:	1
 License:	GPLv2
 Group:		System/Servers
 Url:		https://hostap.epitest.fi/hostapd/
